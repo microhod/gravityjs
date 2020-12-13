@@ -1,4 +1,5 @@
 import Ball from "./ball.js"
+import Colour from "./colour.js"
 
 const defaultProps = {
   gravity: 2,
@@ -8,9 +9,13 @@ const defaultProps = {
   border: true
 }
 
+var rand = (start, end) => {
+  return start + (end - start) * Math.random()
+}
+
 export default class Scene {
 
-  constructor (props) {
+  constructor(props) {
     props = {
       ...defaultProps,
       ...props
@@ -31,26 +36,26 @@ export default class Scene {
     document.addEventListener('DOMContentLoaded', () => this.update())
   }
 
-  createBalls (minRadius, maxRadius, numBalls) {
+  createBalls(minRadius, maxRadius, numBalls) {
     var { canvas } = this
 
     this.balls = []
     for (let i = 0; i < numBalls; i++) {
-      var r = minRadius + (Math.random() * (maxRadius - minRadius))
-      var b = new Ball({id: i, radius: r})
+      var b = new Ball({
+        id: i,
+        radius: rand(minRadius, maxRadius),
+        colour: new Colour(rand(0, 255), rand(0, 255), rand(0, 255))
+      })
       b.randomisePosition(canvas.width, canvas.height)
       this.balls.push(b)
     }
   }
 
-  update () {
+  update() {
     const { ctx, canvas, gravity } = this
 
     // queue the next update
     window.requestAnimationFrame(() => this.update())
-
-    // ctx.clearRect(0, 0, canvas.width, canvas.height)
-    // this.balls.forEach(b => b.draw(ctx))
 
     // deal with collisions
     var collisions = Ball.getCollisions(this.balls)
@@ -73,16 +78,16 @@ export default class Scene {
   }
 
   // draw the ball
-  drawBall (ball) {
+  drawBall(ball) {
     var { ctx } = this
 
     ctx.beginPath()
-    ctx.fillStyle = ball.style
     ctx.arc(
       ball.c.x, ball.c.y,
       ball.r,
       0, Math.PI * 2
     )
+    ctx.fillStyle = `rgb(${ball.colour.r}, ${ball.colour.g}, ${ball.colour.b})`
     ctx.fill()
   }
 }
