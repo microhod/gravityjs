@@ -1,6 +1,6 @@
-# Simple Newtonian Gravity Simulator
+# GravityJS
 
-Simple simulation of some coloured balls in a box using a [html canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [the Newtonian Gravitation equation](https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation).
+Simple newtonian Gravity simulator as a static website, using a [html canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) and [the Newtonian Gravitation equation](https://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation).
 
 ## Use
 
