@@ -31,6 +31,10 @@ export default class Ball {
     this.c = new Vector(Math.random() * maxX, Math.random() * maxY)
   }
 
+  randomiseVelocity(maxX, maxY) {
+    this.v = new Vector(-1 * maxX + 2 * Math.random() * maxX, -1 * maxY + 2 * Math.random() * maxY)
+  }
+
   // update the velocity and position of the ball based on current acceleration
   update(boundary = true, width = Infinity, height = Infinity) {
     var { c, v } = this

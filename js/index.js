@@ -3,15 +3,20 @@ import Scene from "./scene.js"
 var gravity = document.getElementById("input-gravity")
 var numBalls = document.getElementById("input-num-balls")
 var border = document.getElementById("input-border")
+var initSpeed = document.getElementById("input-init-speed")
+var initSize = document.getElementById("input-init-size")
+
 var button = document.getElementById("button-new")
 
+// max size, once balls gets high enough, they all dissapear
+// if lots are off screen, border clipping doesn't work, they all dissapear again
 
 var minBallRadius = 1
-var maxBallRadius = 1.5
+
 var scene = new Scene({
   canvasId: "canvas",
   minBallRadius: minBallRadius,
-  maxBallRadius: maxBallRadius,
+  maxBallRadius: initSize.value,
   numBalls: numBalls.value,
   gravity: gravity.value,
   border: border.checked
@@ -32,6 +37,6 @@ border.addEventListener("change", updateScene)
 
 // create new balls on button click
 button.addEventListener("click", () => {
-  scene.createBalls(minBallRadius, maxBallRadius, numBalls.value)
+  scene.createBalls(minBallRadius, initSize.value, numBalls.value, initSpeed.value)
   updateScene()
 })

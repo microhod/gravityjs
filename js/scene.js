@@ -30,13 +30,13 @@ export default class Scene {
     canvas.height = window.innerHeight
 
     this.gravity = props.gravity
-    this.createBalls(props.minBallRadius, props.maxBallRadius, props.numBalls)
+    this.createBalls(props.minBallRadius, props.maxBallRadius, props.numBalls, props.maxInitialSpeed)
 
     // begin update loop
     document.addEventListener('DOMContentLoaded', () => this.update())
   }
 
-  createBalls(minRadius, maxRadius, numBalls) {
+  createBalls(minRadius, maxRadius, numBalls, maxInitialSpeed = 0) {
     var { canvas } = this
 
     this.balls = []
@@ -47,6 +47,7 @@ export default class Scene {
         colour: new Colour(rand(0, 255), rand(0, 255), rand(0, 255))
       })
       b.randomisePosition(canvas.width, canvas.height)
+      b.randomiseVelocity(maxInitialSpeed, maxInitialSpeed)
       this.balls.push(b)
     }
   }
